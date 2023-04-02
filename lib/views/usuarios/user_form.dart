@@ -9,12 +9,9 @@ class UserForm extends StatelessWidget{
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
   final controller3 = TextEditingController();
+  final Map<String,String> dados ={};
   @override
   Widget build(BuildContext context) {
-    final  user = ModalRoute.of(context)!.settings.arguments as User;
-    if(user !=null){
-      print(user.nome);
-    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Formulário de cadastro' ),
@@ -38,55 +35,50 @@ class UserForm extends StatelessWidget{
               icon: Icon(Icons.save))
         ],
       ),
-     body: Padding(
-       padding: EdgeInsets.all(12),
-       child: Form(
-         key: myForm,
-         child: Column(
-           children:<Widget> [
-             TextFormField(
-               decoration: InputDecoration(labelText: 'Nome'
+      body: Padding(
+        padding: EdgeInsets.all(12),
+        child: Form(
+          key: myForm,
+          child: Column(
+            children:<Widget> [
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Nome'),
+                controller: controller1,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe um nome';
+                  }
+                  if (value.length < 6) {
+                    return "O nome deve conter ao menos 6 letras";
+                  }
+                  return null;
+                },
 
-               ),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'E-mail'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe um E-mail';
+                  }
+                  bool emailValid = RegExp(
+                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(value);
 
-               controller: controller1,
-               validator: (value) {
-                 if (value == null || value.isEmpty) {
-                   return 'Informe um nome';
-                 }
-                 if (value.length < 6) {
-                   return "O nome deve conter ao menos 6 letras";
-                 }
-                 return null;
-               },
+                  if (!emailValid) {
+                    return 'Informe um E-mail válido';
+                  }
+                  return null;
+                },
+                controller: controller2,
 
-             ),
-             TextFormField(
-               initialValue: 'Preencha seu E-mail', // <-- SEE HERE
 
-               decoration: InputDecoration(
-                 labelText: 'E-mail',
+              ),
 
-               ),
-               validator: (value){
-                 if (value == null || value.isEmpty) {
-                   return 'Informe um E-mail';
-                 }
-                 bool emailValid = RegExp(
-                     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                     .hasMatch(value);
-
-                 if (!emailValid) {
-                   return 'Informe um E-mail válido';
-                 }
-                 return null;
-               },
-             )
-
-           ],
-         ),
-       ),
-     ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
