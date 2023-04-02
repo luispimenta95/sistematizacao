@@ -1,3 +1,4 @@
+//branch de dev
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class UserForm extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Formulário de cadastro'),
+        title: Text('Formulário de cadastro' ),
         centerTitle: true,
         actions:<Widget> [
           IconButton(
