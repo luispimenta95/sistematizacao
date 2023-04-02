@@ -11,6 +11,10 @@ class UserForm extends StatelessWidget{
   final controller3 = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final  user = ModalRoute.of(context)!.settings.arguments as User;
+    if(user !=null){
+      print(user.nome);
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Formulário de cadastro' ),
@@ -41,7 +45,10 @@ class UserForm extends StatelessWidget{
          child: Column(
            children:<Widget> [
              TextFormField(
-               decoration: InputDecoration(labelText: 'Nome'),
+               decoration: InputDecoration(labelText: 'Nome'
+
+               ),
+
                controller: controller1,
                validator: (value) {
                  if (value == null || value.isEmpty) {
@@ -55,8 +62,13 @@ class UserForm extends StatelessWidget{
 
              ),
              TextFormField(
-               decoration: InputDecoration(labelText: 'E-mail'),
-               validator: (value) {
+               initialValue: 'Preencha seu E-mail', // <-- SEE HERE
+
+               decoration: InputDecoration(
+                 labelText: 'E-mail',
+
+               ),
+               validator: (value){
                  if (value == null || value.isEmpty) {
                    return 'Informe um E-mail';
                  }
@@ -69,10 +81,7 @@ class UserForm extends StatelessWidget{
                  }
                  return null;
                },
-               controller: controller2,
-
-
-             ),
+             )
 
            ],
          ),
