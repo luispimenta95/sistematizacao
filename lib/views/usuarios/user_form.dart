@@ -14,30 +14,30 @@ class UserForm extends StatelessWidget{
         actions:<Widget> [
           IconButton(
               onPressed:(){
+
               } ,
               icon: Icon(Icons.save))
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(12),
-        child: Form(
-          key: myForm,
-          child: Column(
-            children:<Widget> [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Nome'),
-                onSaved: (String? value) {
-                  print(value);
-                },
+     body: Padding(
+       padding: EdgeInsets.all(12),
+       child: Form(
+         key: myForm,
+         child: Column(
+           children:<Widget> [
+             TextFormField(
+               decoration: InputDecoration(labelText: 'Nome'),
 
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'E-mail'),
-              )
-            ],
-          ),
-        ),
-      ),
+             ),
+             TextFormField(
+               decoration: InputDecoration(labelText: 'E-mail'),
+
+             ),
+
+           ],
+         ),
+       ),
+     ),
     );
   }
 
