@@ -19,9 +19,9 @@ class AppHome extends StatelessWidget{
 
               IconButton(
                 onPressed: (){
-                  Navigator.of(context).pushNamed(AppRoutes.USER_FORM);
+                  Navigator.of(context).pushNamed(AppRoutes.HOME_USER);
                 },
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.list),
               ),
 
             ],
