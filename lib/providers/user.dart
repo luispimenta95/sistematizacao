@@ -34,20 +34,23 @@ class UserProvider with ChangeNotifier{
     }
     notifyListeners();
   }
-  void deletar(User user){
-    if(user.id.trim().isNotEmpty && user.id != null) {
+  void deletar(User user) {
+    if (user.id
+        .trim()
+        .isNotEmpty && user.id != null) {
       users.remove(user.id);
       notifyListeners();
     }
+  }
     void salvar(_keyForm){
-
-
         _keyForm.currentState.save();
-
-  notifyListeners();
-
-
+        notifyListeners();
+    }
+    bool loginSistema(String nome, String senha){
+      if (nome!='teste' && senha !='123'){
+        return false;
+      }
+      return true;
     }
 
-    }
 }
