@@ -5,56 +5,66 @@ import 'package:sistematizacao/routes/routes.dart';
 import 'package:sistematizacao/views/usuarios/user_tile.dart';
 import '../../data/userFixos.dart';
 import '../../models/user.dart';
+import 'package:sistematizacao/comuns/componentes.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerSenha = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
 
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    final UserProvider users = Provider.of(context);
+    final Componentes lista = Componentes();
+    List listaComponentes = lista.recuperaLista();
+    // Build a Form widget using the _formKey created above.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text('Login Page'),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+        body:
+        Form(
 
-          ],
-        ),
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          TextFormField(
+            controller: _controllerEmail,
+            // The validator receives the text that the user has entered.
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            controller: _controllerSenha,
+            // The validator receives the text that the user has entered.
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          // Add TextFormFields and ElevatedButton here.
+          ElevatedButton(
+            onPressed: () {
+              bool logado = users.loginSistema(_controllerEmail.text, _controllerSenha.text);
+              if(!logado){
+                ScaffoldMessenger.of(context).showSnackBar(
+                    listaComponentes[0]
+
+                );
+              }
+              else {
+                Navigator.of(context).pushReplacementNamed(AppRoutes.HOME_USER);
+              }
+            },
+            child: const Text('Submit'),
+          ),
+
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed:(){},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        ),
     );
   }
 }
