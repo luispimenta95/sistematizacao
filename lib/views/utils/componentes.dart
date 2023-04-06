@@ -24,7 +24,7 @@ class Componentes {
           Text(titulo),
         ],
       ),
-      duration: Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: 3000),
     )
   ];
   return lista;
