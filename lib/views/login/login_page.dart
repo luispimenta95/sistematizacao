@@ -16,54 +16,54 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final UserProvider users = Provider.of(context);
     final Componentes lista = Componentes();
-    List listaComponentes = lista.recuperaLista();
+    List snack = lista.recuperaSnack('text snack');
+    List apBar = lista.recuperaAppBar('text 154');
     // Build a Form widget using the _formKey created above.
     return Scaffold(
-        body:
-        Form(
+      appBar: apBar[0],
+        body: Padding(
+        padding: EdgeInsets.all(12),
+    child: Form(
+    key: _formKey,
+    child: Column(
+    children:<Widget> [
+    TextFormField(
+    decoration: InputDecoration(labelText: 'Nome'),
+    controller: _controllerEmail,
+    validator: (value) {
+    if (value == null || value.isEmpty) {
+    return 'Informe um nome';
+    }
+    if (value.length < 6) {
+    return "O nome deve conter ao menos 6 letras";
+    }
+    return null;
+    },
 
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            controller: _controllerEmail,
-            // The validator receives the text that the user has entered.
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: _controllerSenha,
-            // The validator receives the text that the user has entered.
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          // Add TextFormFields and ElevatedButton here.
-          ElevatedButton(
-            onPressed: () {
-              bool logado = users.loginSistema(_controllerEmail.text, _controllerSenha.text);
-              if(!logado){
-                ScaffoldMessenger.of(context).showSnackBar(
-                    listaComponentes[0]
+    ),
+    TextFormField(
+    decoration: InputDecoration(labelText: 'E-mail'),
+    validator: (value) {
+    if (value == null || value.isEmpty) {
+    return 'Informe um E-mail';
+    }
+    bool emailValid = RegExp(
+    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(value);
 
-                );
-              }
-              else {
-                Navigator.of(context).pushReplacementNamed(AppRoutes.HOME_USER);
-              }
-            },
-            child: const Text('Submit'),
-          ),
+    if (!emailValid) {
+    return 'Informe um E-mail válido';
+    }
+    return null;
+    },
+    controller: _controllerSenha,
 
-        ],
-      ),
+
+    ),
+
+    ],
+    ),
+    ),
         ),
     );
   }
