@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sistematizacao/models/user.dart';
+import 'package:sistematizacao/providers/user.dart';
+
+import '../../routes/routes.dart';
 
 class UserHome extends StatefulWidget {
 
@@ -11,17 +15,14 @@ class UserHome extends StatefulWidget {
 
 class _UserHomeState extends State<UserHome> {
   List<User> filteredItems = [];
-  List<User> main  =[
-    User('1', 'nome', '  email', ''),
-    User('2', 'nome', '  email', ''),
-    User('3', 'nome', '  email', ''),
-    User('4', 'nome', '  email', ''),
-    User('5', 'nome', '  email', ''),
-  ];
+  List<User> main = UserProvider().recuperarTodos.toList();
+  final selfie = Icon(Icons.person);
+
   @override
   void initState() {
     super.initState();
     filteredItems = main;
+    print('Valor da tela de lista" : ${main.length}');
   }
 
   void _filterList(String nome) {
@@ -34,7 +35,27 @@ class _UserHomeState extends State<UserHome> {
 
   @override
   Widget build(BuildContext context) {
+
+        //Provider.of<UserProvider>(context,listen: false).deletar(user);
+        //Navigator.of(context).pop();
+
+
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Lista de Usuários'),
+        centerTitle: true,
+        actions: <Widget>[
+
+
+          IconButton(
+            onPressed: (){
+              Navigator.of(context).pushNamed(AppRoutes.USER_FORM);
+            },
+            icon: Icon(Icons.add),
+          ),
+
+        ],
+      ),
       body:Column(
       children: [
         TextField(
@@ -52,7 +73,68 @@ class _UserHomeState extends State<UserHome> {
             itemCount: filteredItems.length,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
+                leading: selfie,
                 title: Text(filteredItems[index].nome),
+                subtitle: Text(filteredItems[index].email),
+                trailing: Container(
+                  width: 100,
+                 child: Row(
+                   children: <Widget>[
+                     IconButton(
+                       onPressed: (){
+                         final User user = User(filteredItems[index].id, filteredItems[index].nome, filteredItems[index].email, filteredItems[index].selfie);
+
+                         Navigator.of(context).pushNamed(
+                             AppRoutes.USER_FORM,
+                           arguments: user
+
+                         );
+                       },
+                       icon: Icon(Icons.edit),
+                       color: Colors.orange,
+                     ),
+
+                     IconButton(
+                       onPressed: (){
+                         showDialog(
+                           context: context,
+                           builder: (BuildContext context) {
+                             return AlertDialog(
+                               title: Text("Excluir usuário"),
+                               content: Text("Tem certeza?"),
+                               actions: [
+                                 TextButton(
+                                   child: Text("Cancelar"),
+                                   onPressed:  () {
+                                     Navigator.of(context).pop();
+                                   },
+                                 ),
+                                 TextButton(
+                                   child: Text("Sim"),
+                                   onPressed:  () {
+                                     final User exc = User(filteredItems[index].id, filteredItems[index].nome, filteredItems[index].email, filteredItems[index].selfie);
+                                        setState(() {
+                                          main.removeAt(index);
+                                          Navigator.of(context).pop();
+                                        });
+
+
+                                     print(filteredItems.length);
+                                   },
+                                 ),
+                               ],
+                             );;
+                           },
+                         );
+                       },
+                       icon: Icon(Icons.delete),
+                       color: Colors.red,
+                     ),
+
+
+                   ],
+                 ),
+                ),
               );
             },
           ),

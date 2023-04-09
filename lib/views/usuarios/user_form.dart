@@ -1,10 +1,17 @@
-//branch de dev
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sistematizacao/models/user.dart';
-import 'package:sistematizacao/providers/user.dart';
 
-class UserForm extends StatelessWidget{
+import '../../models/user.dart';
+import '../../providers/user.dart';
+
+class UserForm extends StatefulWidget {
+
+
+  @override
+  State<UserForm> createState() => _UserFormState();
+}
+
+class _UserFormState extends State<UserForm> {
   final myForm = GlobalKey<FormState>();
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
@@ -22,12 +29,19 @@ class UserForm extends StatelessWidget{
                 bool isValid = myForm.currentState!.validate();
                 if(isValid){
                   myForm.currentState!.save();
-                  Provider.of<UserProvider>(context, listen: false).put(
-                    User(
-                        '',controller1.text, controller2.text, ''
-                    ),
-
+                  final User user =
+                  User(
+                      '',controller1.text, controller2.text, ''
                   );
+                  Provider.of<UserProvider>(context, listen: false).put(
+                      user
+                  );
+                  List<User> main = UserProvider().recuperarTodos.toList();
+                  setState(() {
+                    main.add(user);
+                    print('Valor da tela de adicionar" : ${main.length}');
+                  });
+
                   Navigator.of(context).pop();
                 }
 
@@ -81,5 +95,4 @@ class UserForm extends StatelessWidget{
       ),
     );
   }
-
 }

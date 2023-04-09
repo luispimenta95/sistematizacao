@@ -11,21 +11,6 @@ class UserList extends StatelessWidget{
   Widget build(BuildContext context) {
     final UserProvider users = Provider.of(context);
         return Scaffold(
-          appBar: AppBar(
-            title: Text('Lista de Usuários'),
-            centerTitle: true,
-            actions: <Widget>[
-
-
-              IconButton(
-                onPressed: (){
-                  Navigator.of(context).pushNamed(AppRoutes.USER_FORM);
-                },
-                icon: Icon(Icons.add),
-              ),
-
-            ],
-          ),
           body: ListView.builder(
               itemCount:users.recuperaTotal ,
               itemBuilder: (context,i) => UserTile(users.posicao(i)),
