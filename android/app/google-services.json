@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "272422552145",
+    "project_id": "sistematizacaoceub-704ad",
+    "storage_bucket": "sistematizacaoceub-704ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272422552145:android:7dfcdd7752cd22b20b2e70",
+        "android_client_info": {
+          "package_name": "com.example.sistematizacao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272422552145-mbvmsbjjfknf9tk38il7ngkq5lq4afl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxbrlVG_SYnPCx_ulfRXMXrQhDKCYIOvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272422552145-mbvmsbjjfknf9tk38il7ngkq5lq4afl9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "272422552145-m45976uoi18rvq8l0sqi6bi6bb2gtm4e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sistematizacao"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
