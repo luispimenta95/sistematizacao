@@ -16,6 +16,28 @@ class UserTile extends StatelessWidget{
       backgroundImage: NetworkImage(user.selfie),
     )
     ;
+
+    Widget cancelar = TextButton(
+      child: Text("Cancelar"),
+      onPressed:  () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget confirmar = TextButton(
+      child: Text("Sim"),
+      onPressed:  () {
+        Provider.of<UserProvider>(context,listen: false).deletar(user);
+        Navigator.of(context).pop();
+      },
+    );
+    AlertDialog alert = AlertDialog(
+      title: Text("Excluir usuário"),
+      content: Text("Tem certeza?"),
+      actions: [
+        cancelar,
+        confirmar,
+      ],
+    );
     return ListTile(
       leading: selfie,
       title: Text(user.nome),
@@ -36,7 +58,14 @@ class UserTile extends StatelessWidget{
             ),
 
             IconButton(
-              onPressed: (){},
+              onPressed: (){
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return alert;
+                  },
+                );
+              },
               icon: Icon(Icons.delete),
               color: Colors.red,
             ),
