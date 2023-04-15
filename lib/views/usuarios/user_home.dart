@@ -128,7 +128,7 @@ class _UserHomeState extends State<UserHome> {
                             );
                           },
                           icon: Icon(Icons.delete),
-                          color: Colors.red,
+
                         ),
 
 

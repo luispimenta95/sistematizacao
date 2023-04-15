@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sistematizacao/views/login/login_page.dart';
-import 'package:sistematizacao/views/recibos/recibos_home.dart';
+import 'package:sistematizacao/views/recibos/recibos.dart';
 import 'package:sistematizacao/views/usuarios/user_list.dart';
+
+import '../recibos/recibos.dart';
 
 class AppHome extends StatelessWidget {
   const AppHome({super.key});
@@ -28,7 +30,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   List<Widget> tabs = [
     UserList(),
-    ReciboHome()
+    Recibos()
 
 
   ];
