@@ -15,6 +15,13 @@ class UserList extends StatelessWidget{
               itemCount:users.recuperaTotal ,
               itemBuilder: (context,i) => UserTile(users.posicao(i)),
           ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: (){
+                Navigator.of(context).pushNamed(AppRoutes.USER_FORM);
+              },
+              tooltip: 'Adicionar usuário',
+              child: const Icon(Icons.add),
+            )
 
         );
   }

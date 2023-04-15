@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sistematizacao/providers/user.dart';
 import 'package:sistematizacao/routes/routes.dart';
+import 'package:sistematizacao/views/home/app_home.dart';
 import 'package:sistematizacao/views/login/login_page.dart';
 import 'package:sistematizacao/views/usuarios/user_home.dart';
 import 'package:sistematizacao/views/usuarios/user_form.dart';
@@ -24,9 +25,10 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
         routes: {
-            //AppRoutes.HOME : (_) =>  LoginPage(),
-            AppRoutes.HOME : (_) =>  UserHome(),
+            AppRoutes.HOME : (_) =>  AppHome(),
+            AppRoutes.HOME_USER : (_) =>  UserHome(),
             AppRoutes.USER_FORM : (_) => UserForm(),
+
 
         },
       ),
