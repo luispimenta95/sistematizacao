@@ -75,20 +75,13 @@ class _UserHomeState extends State<UserHome> {
                 return ListTile(
                   leading: selfie,
                   title: Text(filteredItems[index].nome),
-                  subtitle: Text(filteredItems[index].email),
+                  subtitle: Text(filteredItems[index].cpf),
                   trailing: Container(
                     width: 100,
                     child: Row(
                       children: <Widget>[
                         IconButton(
                           onPressed: (){
-                            final User user = User(filteredItems[index].id, filteredItems[index].nome, filteredItems[index].email, filteredItems[index].selfie);
-
-                            Navigator.of(context).pushNamed(
-                                AppRoutes.USER_FORM,
-                                arguments: user
-
-                            );
                           },
                           icon: Icon(Icons.edit),
                           color: Colors.orange,
@@ -112,14 +105,6 @@ class _UserHomeState extends State<UserHome> {
                                     TextButton(
                                       child: Text("Sim"),
                                       onPressed:  () {
-                                        final User exc = User(filteredItems[index].id, filteredItems[index].nome, filteredItems[index].email, filteredItems[index].selfie);
-                                        setState(() {
-                                          main.removeAt(index);
-                                          Navigator.of(context).pop();
-                                        });
-
-
-                                        print(filteredItems.length);
                                       },
                                     ),
                                   ],

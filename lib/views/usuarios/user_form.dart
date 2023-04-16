@@ -31,17 +31,9 @@ class _UserFormState extends State<UserForm> {
                   myForm.currentState!.save();
                   final User user =
                   User(
-                      '',controller1.text, controller2.text, ''
+                      '',controller1.text, controller2.text
                   );
-                  Provider.of<UserProvider>(context, listen: false).put(
-                      user
-                  );
-                  List<User> main = UserProvider().recuperarTodos.toList();
-                  setState(() {
-                    main.add(user);
-                    print('Valor da tela de adicionar" : ${main.length}');
-                  });
-
+                  Provider.of<UserProvider>(context, listen: false).realizarCadastro(user);
                   Navigator.of(context).pop();
                 }
 
@@ -70,17 +62,11 @@ class _UserFormState extends State<UserForm> {
 
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'E-mail'),
+                decoration: InputDecoration(labelText: 'CPF'),
+                  keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Informe um E-mail';
-                  }
-                  bool emailValid = RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(value);
-
-                  if (!emailValid) {
-                    return 'Informe um E-mail válido';
+                    return 'Informe um CPF';
                   }
                   return null;
                 },

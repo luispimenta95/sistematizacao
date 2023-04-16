@@ -71,20 +71,6 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    bool isValid = _formKey.currentState!.validate();
-                    if (isValid) {
-                      bool logado = users.loginSistema(
-                          _controllerEmail.text, _controllerSenha.text);
-                      if (!logado) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            snack[0]
-                        );
-                      }
-                      else {
-                        Navigator.of(context).pushReplacementNamed(
-                            AppRoutes.HOME_USER);
-                      }
-                    }
                   },
                   child: Text('Submit'),
                 ),

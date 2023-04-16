@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sistematizacao/models/user.dart';
 import '../data/userFixos.dart';
@@ -23,13 +24,13 @@ class UserProvider with ChangeNotifier{
     }
     if(user.id.trim().isNotEmpty && user.id !=null && users.containsKey(user.id)){
       users.update(user.id, (_) => User(
-          user.id, user.nome, user.email, user.selfie)
+          user.id, user.nome, user.cpf)
       );
 
     }else {
       final id = (recuperaTotal + 1).toString();
       users.putIfAbsent(id, () => User(
-          id,user.nome, user.email, user.selfie
+          id,user.nome, user.cpf
       ));
     }
     notifyListeners();
@@ -46,11 +47,14 @@ class UserProvider with ChangeNotifier{
         _keyForm.currentState.save();
         notifyListeners();
     }
-    bool loginSistema(String nome, String senha){
-      if (nome!='teste' && senha !='123'){
-        return false;
-      }
-      return true;
-    }
+  Future realizarCadastro(User u) async{
+    final tabela = FirebaseFirestore.instance.collection('usuarios');
+    final docRef = tabela.doc();
+    await docRef.set({
+      "nome": u.nome,
+      'cpf': u.cpf
+    });
+
+  }
 
 }

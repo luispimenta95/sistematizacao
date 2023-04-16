@@ -45,7 +45,7 @@ class _RecibosState extends State<Recibos> {
                 return ListTile(
                   leading: selfie,
                   title: Text(filteredItems[index].nome),
-                  subtitle: Text(filteredItems[index].email),
+                  subtitle: Text(filteredItems[index].cpf),
                   trailing: Container(
                     width: 100,
                     child: Row(

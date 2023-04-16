@@ -10,12 +10,8 @@ class UserTile extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    final selfie = user.selfie == null || user.selfie.isEmpty || user.selfie==' ' ? CircleAvatar(
-      child: Icon(Icons.person))
-    : CircleAvatar(
-      backgroundImage: NetworkImage(user.selfie),
-    )
-    ;
+    final selfie  = CircleAvatar(
+      child: Icon(Icons.person));
 
     Widget cancelar = TextButton(
       child: Text("Cancelar"),
@@ -41,7 +37,7 @@ class UserTile extends StatelessWidget{
     return ListTile(
       leading: selfie,
       title: Text(user.nome),
-      subtitle: Text(user.email),
+      subtitle: Text(user.cpf),
       trailing: Container(
     width: 100,
         child: Row(

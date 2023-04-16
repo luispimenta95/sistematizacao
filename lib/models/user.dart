@@ -3,13 +3,11 @@ import 'package:flutter/cupertino.dart';
 class User {
   final  String id;
   final  String nome;
-  final  String email;
-  final  String selfie;
+  final  String cpf;
 
   const User(
       this.id,
       @required this.nome,
-      @required this.email,
-      @required this.selfie,
+      @required this.cpf
       );
 }
