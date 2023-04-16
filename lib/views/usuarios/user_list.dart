@@ -9,7 +9,7 @@ class UserList extends StatelessWidget{
     final UserProvider users = Provider.of(context);
         return Scaffold(
           body: ListView.builder(
-              itemCount:users.recuperaTotal ,
+              itemCount:users.getAllDocuments('usuarios').toString().length ,
               itemBuilder: (context,i) => UserTile(users.posicao(i)),
           ),
 

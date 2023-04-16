@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:sistematizacao/providers/user.dart';
 import 'package:sistematizacao/views/login/login_page.dart';
 import 'package:sistematizacao/views/recibos/recibos.dart';
 import 'package:sistematizacao/views/usuarios/user_form.dart';
@@ -35,6 +37,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
 
   ];
+  UserProvider up = UserProvider();
+
 
 
   @override
@@ -58,7 +62,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         currentIndex: _selectedIndex,
         onTap: (int index) {
           setState(
-                () {
+                () async {
+  List<DocumentSnapshot> documents = await up.getAllDocuments('usuarios');
+  print(documents.length.toString());
               _selectedIndex = index;
             },
           );

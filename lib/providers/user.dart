@@ -6,13 +6,12 @@ import '../data/userFixos.dart';
 
 class UserProvider with ChangeNotifier{
   Map<String, User> users = { ...DADOS};
+  final tabela = FirebaseFirestore.instance.collection('usuarios');
 
   List<User> get recuperarTodos{
     return [...users.values];
   }
-  int get recuperaTotal{
-    return users.length;
-  }
+
   User posicao(int i ){
     return users.values.elementAt(i);
 
@@ -28,7 +27,7 @@ class UserProvider with ChangeNotifier{
       );
 
     }else {
-      final id = (recuperaTotal + 1).toString();
+      final id = (getAllDocuments('usuarios').toString().length + 1).toString();
       users.putIfAbsent(id, () => User(
           id,user.nome, user.cpf
       ));
@@ -48,13 +47,20 @@ class UserProvider with ChangeNotifier{
         notifyListeners();
     }
   Future realizarCadastro(User u) async{
-    final tabela = FirebaseFirestore.instance.collection('usuarios');
+
     final docRef = tabela.doc();
     await docRef.set({
       "nome": u.nome,
       'cpf': u.cpf
     });
 
+
   }
+  Future<List<DocumentSnapshot>> getAllDocuments(String collectionPath) async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(collectionPath).get();
+    return snapshot.docs;
+  }
+
+
 
 }
