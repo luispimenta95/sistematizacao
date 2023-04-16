@@ -25,9 +25,10 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
         routes: {
-            AppRoutes.HOME : (_) =>  AppHome(),
+            AppRoutes.HOME :      (_) =>  LoginPage(),
             AppRoutes.HOME_USER : (_) =>  UserHome(),
             AppRoutes.USER_FORM : (_) => UserForm(),
+            AppRoutes.APP_HOME :  (_) => AppHome()
 
 
         },

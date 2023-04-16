@@ -32,7 +32,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   List<Widget> tabs = [
-    UserForm(),
+    UserList(),
     Recibos()
 
 
@@ -62,10 +62,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         currentIndex: _selectedIndex,
         onTap: (int index) {
           setState(
-                () async {
-  List<DocumentSnapshot> documents = await up.getAllDocuments('usuarios');
-  print(documents.length.toString());
+                (){
+                  /*List<DocumentSnapshot> documents = await up.getAllDocuments('usuarios');
+                  print(documents.length.toString());
+              */
               _selectedIndex = index;
+
             },
           );
         },

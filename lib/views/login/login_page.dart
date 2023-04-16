@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sistematizacao/providers/user.dart';
@@ -15,6 +16,24 @@ class LoginPage extends StatelessWidget {
     final Componentes lista = Componentes();
     List snack = lista.recuperaSnack(' Login incorreto, tente novamente !');
     List apBar = lista.recuperaAppBar('Login Sistematização');
+    Future<void> realizarLogin() async{
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _controllerEmail.text,
+            password: _controllerSenha.text
+        );
+        if(userCredential != null){
+          Navigator.of(context).pushNamed(
+            AppRoutes.APP_HOME,
+          );
+        }
+      } on FirebaseAuthException catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(snack[0]);
+        _controllerSenha.clear();
+        _controllerEmail.clear();
+      }
+    }
+
     return Scaffold(
       appBar: apBar[0],
       body: Center(
@@ -71,6 +90,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
+                    realizarLogin();
                   },
                   child: Text('Submit'),
                 ),
