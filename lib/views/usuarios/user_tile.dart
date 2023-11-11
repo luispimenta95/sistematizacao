@@ -26,7 +26,7 @@ class UserTile extends StatelessWidget{
     Widget confirmar = TextButton(
       child: Text("Sim"),
       onPressed:  () {
-        Provider.of<UserProvider>(context,listen: false).deletar(user);
+        //Provider.of<UserProvider>(context,listen: false).deletar(user);
         Navigator.of(context).pop();
       },
     );
