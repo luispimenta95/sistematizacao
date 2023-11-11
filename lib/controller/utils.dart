@@ -35,5 +35,14 @@ class Util{
     return outputDate;
   }
 
+  final coinsOptions = {
+    "Dirham dos Emirados": "AED",
+    "Bitcoin": "BTC",
+    "Dólar Americano": "USD",
+    "Dólar Canadense": "CAD",
+    "teste erro": "err"
+  };
+
+
 
 }

@@ -4,13 +4,22 @@ import '../data/userFixos.dart';
 
 
 class UserProvider with ChangeNotifier{
-    String pesquisa = '';
-    void definirPesquisa(String query) {
-      pesquisa = query;
+    String moeda = '';
+    String codigoMoeda = '';
+
+    void definirNomeMoeda(String query) {
+      moeda = query;
     }
-    String recuperarPesquisa(){
+    String recuperarNomeMoeda(){
       notifyListeners();
-        return pesquisa;
+        return moeda;
+    }
+    void definirCodigoMoeda(String query) {
+      codigoMoeda = query;
+    }
+    String recuperarCodigoMoeda(){
+      notifyListeners();
+      return codigoMoeda;
     }
 
 }

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sistematizacao/views/usuarios/pesquisa_quinzenal.dart';
 
 import '../../controller/api.dart';
+import '../../controller/utils.dart';
 import '../../providers/user.dart';
 
 class CustomSearchDelegate extends SearchDelegate<String> {
   final List<String> items;
   final ApiMonetizacao api = new ApiMonetizacao();
+  final Util util = new Util();
 
   CustomSearchDelegate(this.items);
 
@@ -95,7 +98,9 @@ class CustomSearchDelegate extends SearchDelegate<String> {
           onTap: () {
             // Update the search query when an option is clicked
             query = suggestions[index];
-            users.definirPesquisa(query);
+            users.definirNomeMoeda(query);
+            print(query);
+            users.definirCodigoMoeda(util.coinsOptions[query]!);
             // Close the search and display the selected item
             showResults(context);
           },
